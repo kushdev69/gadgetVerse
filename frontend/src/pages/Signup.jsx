@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { register } from "../services/authService.js";
 import { useNavigate, Link } from "react-router-dom";
+import { useStore } from "../context/StoreContext";
 
 function Signup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ userName: "", email: "", password: "" });
+  const { notify } = useStore();
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await register(formData);
-      alert(res.data.message);
+      await register(formData);
+      notify("Account created. Please sign in.");
       navigate("/signin");
       setFormData({ userName: "", email: "", password: "" });
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Signup failed. Is the backend server running?");
+      notify(error.response?.data?.message || "Signup failed. Is the backend server running?", "error");
     }
   }
 
@@ -41,13 +43,13 @@ function Signup() {
             </svg>
           </div>
           <h2 style={{ fontFamily: "'Fredoka', sans-serif", fontSize: '2.5rem', fontWeight: 700, color: 'white', marginBottom: '1rem' }}>
-            Join ToyVerse
+            Join GadgetVerse
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, maxWidth: '340px', margin: '0 auto 2rem', fontSize: '1rem' }}>
-            Create your parent account and unlock a world of educational, creative, and child-safe toys.
+            Create your account and unlock a world of reliable, stylish, and powerful gadgets.
           </p>
           <div style={{ textAlign: 'left', maxWidth: '320px', margin: '0 auto' }}>
-            {["Free express delivery on orders above ₹999", "30-day hassle-free replacements", "Developer & STEM educator verified toys", "Premium child-safe materials guaranteed"].map(b => (
+            {["Free express delivery on orders above ₹999", "30-day hassle-free replacements", "Verified brands with warranty", "Secure payments and reliable support"].map(b => (
               <div key={b} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.75rem', color: 'rgba(255,255,255,0.9)', fontSize: '0.95rem' }}>
                 <span style={{ color: 'white', fontWeight: 700 }}>✓</span> <span>{b}</span>
               </div>

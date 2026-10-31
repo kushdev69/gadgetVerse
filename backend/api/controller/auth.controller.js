@@ -1,19 +1,24 @@
 import { Auth } from "../model/auth.schema.js";
 
+const normalizeEmail = (email) => String(email ?? "").trim().toLowerCase();
+
 export const signup = async (req, res, next) => {
   try {
-    const { userName, email, password } = req.body;
+    const userName = String(req.body.userName ?? "").trim();
+    const email = normalizeEmail(req.body.email);
+    const password = String(req.body.password ?? "").trim();
 
     if (!userName || !email || !password) {
       return res.status(400).json({
         message: "All fields required",
       });
     }
+
     const isUserExist = await Auth.findOne({ email });
 
     if (isUserExist) {
       return res.status(400).json({
-        message: "Email is already exist",
+        message: "Email already exists",
       });
     }
 
@@ -28,6 +33,7 @@ export const signup = async (req, res, next) => {
       data: {
         _id: user._id,
         userName: user.userName,
+        username: user.userName,
       },
     });
   } catch (err) {
@@ -39,7 +45,8 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const email = normalizeEmail(req.body.email);
+    const password = String(req.body.password ?? "").trim();
 
     if (!email || !password) {
       return res.status(400).json({
@@ -65,6 +72,8 @@ export const signin = async (req, res, next) => {
       message: "user login successful",
       data: {
         _id: user._id,
+        userName: user.userName,
+        username: user.userName,
         email: user.email,
       },
     });

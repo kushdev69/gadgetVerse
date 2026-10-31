@@ -1,20 +1,25 @@
 import { useState } from "react";
 import { login } from "../services/authService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useStore } from "../context/StoreContext";
 
 function Signin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const { signIn, notify } = useStore();
+  const navigate = useNavigate();
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const res = await login(formData);
-      alert(res.data.message);
+      signIn(res.data?.data ?? res.data);
+      notify("Welcome back to GadgetVerse");
+      navigate("/profile");
       setFormData({ email: "", password: "" });
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Login failed. Is the backend server running?");
+      notify(error.response?.data?.message || "Login failed. Is the backend server running?", "error");
     }
   }
 
@@ -39,13 +44,13 @@ function Signin() {
             </svg>
           </div>
           <h2 style={{ fontFamily: "'Fredoka', sans-serif", fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem', color: 'white' }}>
-            Welcome back to ToyVerse
+            Welcome back to GadgetVerse
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, maxWidth: '340px', margin: '0 auto 2.5rem', fontSize: '1rem' }}>
-            Unlocking creativity and developmental STEM skills for kids across India. Sign in to check your order details.
+            Discovering better technology for customers across India. Sign in to check your order details.
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
-            {[['10K+', 'Toys'], ['4.9★', 'Rating'], ['100K+', 'Parents']].map(([v, l]) => (
+            {[['10K+', 'Gadgets'], ['4.9★', 'Rating'], ['100K+', 'Customers']].map(([v, l]) => (
               <div key={l} style={{ textAlign: 'center' }}>
                 <div style={{ color: 'white', fontWeight: 800, fontSize: '1.4rem', fontFamily: "'Fredoka', sans-serif" }}>{v}</div>
                 <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', fontWeight: 600 }}>{l}</div>

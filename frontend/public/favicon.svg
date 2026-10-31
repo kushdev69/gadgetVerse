@@ -1,18 +1,10 @@
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Flame -->
-  <path d="M9 18C9 20.5 10.5 22 12 22C13.5 22 15 20.5 15 18H9Z" fill="#ff7b54" opacity="0.8"/>
-  <path d="M10 18C10 19.5 11 20.5 12 20.5C13 20.5 14 19.5 14 18H10Z" fill="#ff6b8b"/>
-  <!-- Body -->
-  <path d="M12 2C15 6 16.5 10 16.5 14.5C16.5 16 15.5 17 14 17H10C8.5 17 7.5 16 7.5 14.5C7.5 10 9 6 12 2Z" fill="url(#toy-grad)" />
-  <!-- Fins -->
-  <path d="M7.5 13L4.5 16.5V17H7.5V13Z" fill="#7c3aed"/>
-  <path d="M16.5 13L19.5 16.5V17H16.5V13Z" fill="#7c3aed"/>
-  <!-- Window -->
-  <circle cx="12" cy="9" r="2" fill="#fffbf7"/>
-  <circle cx="12" cy="9" r="1" fill="#22d3ee"/>
+  <rect x="6" y="2.5" width="12" height="19" rx="2.5" fill="url(#gadget-grad)" />
+  <rect x="8" y="5" width="8" height="12" rx="1" fill="#fffbf7" opacity="0.95"/>
+  <circle cx="12" cy="19.2" r="1" fill="#fffbf7"/>
   
   <defs>
-    <linearGradient id="toy-grad" x1="12" y1="2" x2="12" y2="17" gradientUnits="userSpaceOnUse">
+    <linearGradient id="gadget-grad" x1="6" y1="2" x2="18" y2="22" gradientUnits="userSpaceOnUse">
       <stop stopColor="#ff7b54"/>
       <stop offset="0.5" stopColor="#ff6b8b"/>
       <stop offset="1" stopColor="#7c3aed"/>

@@ -1,19 +1,14 @@
 import axios from 'axios';
 
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
+    headers: { "Content-Type": "application/json" }
+});
+
 export const register = async (userData) => {
-    try {
-        return await axios.post("http://localhost:5000/api/auth/signup", userData);
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+    return api.post("/auth/signup", userData);
 }
 
 export const login = async (userData) => {
-    try {
-        return await axios.post("http://localhost:5000/api/auth/signin", userData);
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+    return api.post("/auth/signin", userData);
 }

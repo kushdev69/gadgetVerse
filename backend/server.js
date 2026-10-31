@@ -1,13 +1,9 @@
 import app from "./app.js";
 import { db } from "./config/db.js";
 
+await db();
 
-//  db:
-db();
-
-
-//  localhost:
-
-app.listen(process.env.PORT, () => {
-  console.log(`localhost running at port ${process.env.PORT}`);
+const port = Number(process.env.PORT) || 3000;
+app.listen(port, () => {
+  console.log(`GadgetVerse API running at port ${port}`);
 });

@@ -34,10 +34,10 @@ export default function Footer() {
                   </linearGradient>
                 </defs>
               </svg>
-              <span className="gradient-text">ToyVerse</span>
+              <span className="gradient-text">GadgetVerse</span>
             </div>
             <p className="footer-brand-desc">
-              Unlocking imagination, creativity, and STEM skills for kids across India. Premium, child-safe learning toys.
+              Bringing reliable, stylish, and powerful technology to customers across India. Premium gadgets from brands you can trust.
             </p>
             <div className="flex gap-3" style={{ marginTop: '1.5rem' }}>
               {SOCIALS.map(s => (
@@ -46,28 +46,28 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <div className="footer-col-title">Shop by Age</div>
-            <Link to="/category/0-2" className="footer-link">0-2 Years</Link>
-            <Link to="/category/3-5" className="footer-link">3-5 Years</Link>
-            <Link to="/category/6-8" className="footer-link">6-8 Years</Link>
-            <Link to="/category/9-plus" className="footer-link">9+ Years</Link>
+            <div className="footer-col-title">Shop Gadgets</div>
+            <Link to="/category/smartphones" className="footer-link">Smartphones</Link>
+            <Link to="/category/laptops" className="footer-link">Laptops</Link>
+            <Link to="/category/audio" className="footer-link">Audio & Earbuds</Link>
+            <Link to="/category/wearables" className="footer-link">Smart Wearables</Link>
           </div>
           <div>
             <div className="footer-col-title">About Us</div>
-            {["Our Story", "Pedagogy & Design", "Safety Protocols", "Parent Reviews", "Press & Awards"].map(l => (
+            {["Our Story", "Brand Promise", "Warranty Policy", "Customer Reviews", "Press & Awards"].map(l => (
               <a key={l} href="#" className="footer-link">{l}</a>
             ))}
           </div>
           <div>
             <div className="footer-col-title">Support</div>
-            {["Parent Helpdesk", "Track Gift Order", "Easy Replacements", "FAQ", "Shipping Policy"].map(l => (
+            {["Tech Helpdesk", "Track Your Order", "Easy Replacements", "FAQ", "Shipping Policy"].map(l => (
               <a key={l} href="#" className="footer-link">{l}</a>
             ))}
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} ToyVerse. All rights reserved.</span>
-          <span>Crafted with ♥ for Curious Minds</span>
+          <span>© {new Date().getFullYear()} GadgetVerse. All rights reserved.</span>
+          <span>Curated with ♥ for Curious Minds</span>
         </div>
       </div>
     </footer>

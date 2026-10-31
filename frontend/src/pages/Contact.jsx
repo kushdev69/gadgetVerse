@@ -1,25 +1,29 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useState } from "react";
+import { useStore } from "../context/StoreContext";
 
 const FAQ = [
-  { q: "Are your toys non-toxic and child-safe?", a: "Absolutely. All our toys are EN71 & ASTM certified, meaning they are manufactured using non-toxic water-based finishes, organic wood, and BPA-free plastics." },
-  { q: "What should I do if a toy has missing pieces?", a: "Don't worry. Simply contact us with your order number, and we will dispatch the missing pieces immediately at zero cost." },
-  { q: "Can I filter toys by child developmental milestones?", a: "Yes, our categories are fully segmented by age-groups, helping you match toys directly with motor, logical, and sensory skill levels." },
+  { q: "Are your gadgets genuine and covered by warranty?", a: "Absolutely. We source from verified brands and authorized distributors. Eligible products include a brand warranty, clearly listed on their product page." },
+  { q: "What should I do if my gadget arrives damaged?", a: "Contact us with your order number and photos within 48 hours. We will arrange a quick replacement or resolution at no extra cost." },
+  { q: "Can I get help choosing the right gadget?", a: "Yes. Our product categories and buying guides make it easy to compare features, and our support team can help you find the right fit." },
 ];
 
 export default function Contact() {
+  const [sent, setSent] = useState(false);
+  const { notify } = useStore();
   return (
     <>
       <Navbar />
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.07))', borderBottom: '1px solid var(--color-border)', padding: '6rem 0 4rem' }}>
         <div className="container text-center anim-fadein-up">
-          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>✦ ToyVerse Care</div>
+          <div className="section-eyebrow" style={{ justifyContent: 'center' }}>✦ GadgetVerse Care</div>
           <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: '3.5rem', fontWeight: 800, lineHeight: 1.1, marginBottom: '1rem' }}>
             We're here to <span className="gradient-text">support you.</span>
           </h1>
           <p className="text-muted" style={{ maxWidth: '500px', margin: '0 auto', fontSize: '1.1rem' }}>
-            Have a question about toy safety, shipping, or missing parts? Send us a message anytime.
+            Have a question about a gadget, delivery, warranty, or return? Send us a message anytime.
           </p>
         </div>
       </div>
@@ -29,7 +33,7 @@ export default function Contact() {
           {/* Form */}
           <div className="card anim-fadein-up" style={{ padding: '3rem' }}>
             <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: '1.75rem', fontWeight: 700, marginBottom: '2rem' }}>Send a Message</h2>
-            <form onSubmit={e => { e.preventDefault(); alert('Message sent! We\'ll be in touch shortly.'); }}>
+            <form onSubmit={e => { e.preventDefault(); setSent(true); notify("Message sent! We'll be in touch shortly."); }}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="form-group">
                   <label className="form-label">First Name</label>
@@ -47,18 +51,18 @@ export default function Contact() {
               <div className="form-group">
                 <label className="form-label">Subject</label>
                 <select className="form-input" style={{ background: 'var(--color-surface)', color: 'var(--color-text-main)', border: '1px solid var(--color-border)' }}>
-                  <option>Missing Pieces / Parts</option>
-                  <option>Safety / Quality Concern</option>
+                  <option>Damaged / Missing Accessories</option>
+                  <option>Warranty / Quality Concern</option>
                   <option>Order & Shipping Support</option>
                   <option>General Support</option>
                 </select>
               </div>
               <div className="form-group">
                 <label className="form-label">Message</label>
-                <textarea className="form-input" rows="5" placeholder="How can we help your child's play experience?" required style={{ resize: 'vertical' }}></textarea>
+                <textarea className="form-input" rows="5" placeholder="How can we help with your gadget experience?" required style={{ resize: 'vertical' }}></textarea>
               </div>
               <button type="submit" className="btn btn-primary w-full" style={{ padding: '1rem' }}>
-                Send Message →
+                {sent ? "Message Sent ✓" : "Send Message →"}
               </button>
             </form>
           </div>
@@ -67,7 +71,7 @@ export default function Contact() {
           <div className="anim-fadein-up delay-2">
             <div className="glass-card" style={{ padding: '2rem', marginBottom: '1.5rem' }}>
               <h3 style={{ fontWeight: 700, marginBottom: '1.25rem' }}>Contact Info</h3>
-              {[['📧', 'Email Support', 'care@toyverse.in'], ['📞', 'Parent Helpline', '+91 98765 00000'], ['🕐', 'Working Hours', '9 AM - 9 PM IST']].map(([icon, label, val]) => (
+              {[['📧', 'Email Support', 'care@gadgetverse.in'], ['📞', 'Tech Helpline', '+91 98765 00000'], ['🕐', 'Working Hours', '9 AM - 9 PM IST']].map(([icon, label, val]) => (
                 <div key={label} className="flex items-center gap-3" style={{ marginBottom: '1rem' }}>
                   <div className="trust-icon" style={{ width: 40, height: 40, fontSize: '1rem' }}>{icon}</div>
                   <div>

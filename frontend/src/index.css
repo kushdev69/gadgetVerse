@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Default Warm Premium Toy Theme (Light Mode) */
+  /* Default Warm Premium Gadget Theme (Light Mode) */
   --color-bg: #fffbf7; /* Soft Warm Cream */
   --color-surface: #ffffff;
   --color-surface-elevated: #fbf5ee; /* Pastel Sand */
@@ -122,10 +122,32 @@ img { max-width: 100%; }
 .text-center { text-align: center; }
 .text-muted { color: var(--color-text-secondary); }
 .text-primary { color: var(--color-primary); }
+
+.store-toast {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2000;
+  max-width: min(90vw, 360px);
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius-md);
+  color: #fff;
+  background: #15803d;
+  box-shadow: var(--shadow-lg);
+  font-weight: 600;
+  animation: toast-in 180ms ease-out;
+}
+
+.store-toast.error { background: #b91c1c; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .font-bold { font-weight: 700; }
 .font-medium { font-weight: 500; }
 
-/* Toy-friendly Soft Serif/Bubbly Header font */
+/* Premium storefront typography */
 .serif { font-family: 'Fredoka', sans-serif; font-weight: 700; }
 
 /* Gradient Text */
@@ -213,7 +235,7 @@ img { max-width: 100%; }
   box-shadow: var(--shadow-glow);
 }
 
-/* Cards (More rounded + clean toy vibe) */
+/* Cards (More rounded + clean storefront vibe) */
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -324,6 +346,16 @@ body.dark-mode .glass-card {
   background: var(--color-accent);
 }
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+.nav-user-name {
+  max-width: 10rem;
+  overflow: hidden;
+  color: var(--color-text-main);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-user-name:hover { color: var(--color-accent); }
 .badge-container { position: relative; display: inline-flex; }
 .badge {
   position: absolute;
@@ -807,6 +839,40 @@ body.dark-mode .glass-card {
 .auth-form-inner { width: 100%; max-width: 420px; }
 .auth-form-title { font-family: 'Fredoka', sans-serif; font-size: 2.25rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
 .auth-form-sub { color: var(--color-text-secondary); margin-bottom: 2.5rem; font-weight: 500; }
+
+/* Admin */
+.admin-page {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background: var(--color-bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.admin-card {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem;
+}
+.admin-login-card { max-width: 440px; margin-top: 8vh; }
+.admin-product-card { max-width: 900px; }
+.admin-back-link { display: inline-block; margin-bottom: 2rem; color: var(--color-text-secondary); font-weight: 600; }
+.admin-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.admin-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.25rem; }
+.admin-message { margin-bottom: 1.25rem; padding: 0.8rem 1rem; border-radius: var(--radius-sm); font-weight: 600; }
+.admin-message.success { background: #dcfce7; color: #166534; }
+.admin-message.error { background: #fee2e2; color: #991b1b; }
+.admin-product-form textarea { resize: vertical; }
+.admin-checkbox { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 1.5rem; color: var(--color-text-secondary); font-weight: 600; }
+.admin-checkbox input { width: 1rem; height: 1rem; accent-color: var(--color-primary); }
+
+@media (max-width: 640px) {
+  .admin-card { padding: 1.5rem; }
+  .admin-form-grid { grid-template-columns: 1fr; }
+}
 
 /* Footer */
 .footer {

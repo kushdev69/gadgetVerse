@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useStore } from "../context/StoreContext";
 
 export default function ProductCard({ product, onAddToCart, onAddToWishlist }) {
+  const { wishlist, addToCart, toggleWishlist } = useStore();
+  const isSaved = wishlist.some(item => item.id === product.id);
   return (
     <div className="product-card">
       {product.badge && (
@@ -15,7 +18,7 @@ export default function ProductCard({ product, onAddToCart, onAddToWishlist }) {
           />
         </Link>
         <div className="product-card-actions">
-          <button className="product-action-btn" title="Add to Wishlist" onClick={() => onAddToWishlist?.(product)}>♡</button>
+          <button className="product-action-btn" title={isSaved ? "Remove from Wishlist" : "Add to Wishlist"} onClick={() => { toggleWishlist(product); onAddToWishlist?.(product); }}>{isSaved ? "♥" : "♡"}</button>
           <button className="product-action-btn" title="Quick View">👁</button>
         </div>
       </div>
@@ -26,7 +29,7 @@ export default function ProductCard({ product, onAddToCart, onAddToWishlist }) {
         <div className="product-card-desc">{product.description}</div>
         <div className="product-card-footer">
           <div className="product-card-price">₹{product.price.toLocaleString('en-IN')}</div>
-          <button className="product-add-btn" onClick={() => onAddToCart?.(product)}>+ Cart</button>
+          <button className="product-add-btn" onClick={() => { addToCart(product); onAddToCart?.(product); }}>+ Cart</button>
         </div>
       </div>
     </div>

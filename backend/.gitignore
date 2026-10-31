@@ -1,9 +1,23 @@
 /node_modules
-
-/env
-
-.env
-
-env
-
 node_modules
+
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local virtual environments
+/env/
+env/
+
+# Credentials, certificates, and secret files
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+secrets/
+secret/
+credentials/

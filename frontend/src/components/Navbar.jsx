@@ -1,8 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useStore } from "../context/StoreContext";
 
 export default function Navbar() {
   const location = useLocation();
+  const { cartCount, user, signOut } = useStore();
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "light";
@@ -28,6 +30,7 @@ export default function Navbar() {
   };
 
   const isActive = (path) => location.pathname === path ? "active" : "";
+  const displayName = user?.username || user?.userName || user?.name;
 
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
@@ -55,16 +58,16 @@ export default function Navbar() {
               </linearGradient>
             </defs>
           </svg>
-          <span className="gradient-text" style={{ fontSize: '1.65rem' }}>ToyVerse</span>
+          <span className="gradient-text" style={{ fontSize: '1.65rem' }}>GadgetVerse</span>
         </Link>
 
-        {/* Categories by Age */}
+        {/* Gadget categories */}
         <div className="nav-links">
           <Link to="/" className={`nav-link ${isActive("/")}`}>Home</Link>
-          <Link to="/category/0-2" className={`nav-link ${isActive("/category/0-2")}`}>0-2 Years</Link>
-          <Link to="/category/3-5" className={`nav-link ${isActive("/category/3-5")}`}>3-5 Years</Link>
-          <Link to="/category/6-8" className={`nav-link ${isActive("/category/6-8")}`}>6-8 Years</Link>
-          <Link to="/category/9-plus" className={`nav-link ${isActive("/category/9-plus")}`}>9+ Years</Link>
+          <Link to="/category/smartphones" className={`nav-link ${isActive("/category/smartphones")}`}>Phones</Link>
+          <Link to="/category/laptops" className={`nav-link ${isActive("/category/laptops")}`}>Laptops</Link>
+          <Link to="/category/audio" className={`nav-link ${isActive("/category/audio")}`}>Audio</Link>
+          <Link to="/category/wearables" className={`nav-link ${isActive("/category/wearables")}`}>Wearables</Link>
           <Link to="/contact" className={`nav-link ${isActive("/contact")}`}>Contact</Link>
         </div>
 
@@ -79,12 +82,24 @@ export default function Navbar() {
           
           <Link to="/cart" className="btn-icon badge-container" title="Cart">
             🛒
-            <span className="badge">2</span>
+            {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </Link>
           <Link to="/profile" className="btn-icon" title="Profile">👤</Link>
+          <Link to="/admin" className="btn btn-ghost btn-sm">Admin</Link>
           
-          <Link to="/signin" className="btn btn-ghost btn-sm">Log in</Link>
-          <Link to="/signup" className="btn btn-primary btn-sm">Sign up</Link>
+          {user ? (
+            <>
+              <Link to="/profile" className="nav-user-name" title="View profile">
+                {displayName || "Account"}
+              </Link>
+              <button className="btn btn-ghost btn-sm" onClick={signOut}>Sign out</button>
+            </>
+          ) : (
+            <>
+              <Link to="/signin" className="btn btn-ghost btn-sm">Log in</Link>
+              <Link to="/signup" className="btn btn-primary btn-sm">Sign up</Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
